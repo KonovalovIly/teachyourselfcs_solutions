@@ -1,0 +1,5 @@
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda (row)
+           (map (lambda (col) (dot-product row col)) cols))
+         m)))

@@ -1,0 +1,141 @@
+#######################################################################
+# Test for copying block of size 4;
+#######################################################################
+	.pos 0
+main:	irmovq Stack, %rsp  	# Set up stack pointer
+
+	# Set up arguments for copy function and then invoke it
+	irmovq $4, %rdx		# src and dst have 4 elements
+	irmovq dest, %rsi	# dst array
+	irmovq src, %rdi	# src array
+	call ncopy		 
+	halt			# should halt with num nonzeros in %rax
+StartFun:
+# Оптимизированный ncopy с развертыванием 4x
+ncopy:
+	xorq %rax, %rax		# count = 0
+	andq %rdx, %rdx		# len <= 0?
+	jle Done		# if so, goto Done
+
+	# Развертывание 4x
+	irmovq $4, %r8
+	irmovq $32, %r9		# 4 * 8 = 32 байта
+	
+	# Проверяем, достаточно ли элементов
+	rrmovq %rdx, %rcx
+	subq %r8, %rcx
+	jl HandleSmall
+
+UnrolledLoop:
+	# Используем несколько регистров для параллельной обработки
+	mrmovq (%rdi), %r10
+	mrmovq 8(%rdi), %r11
+	mrmovq 16(%rdi), %r12
+	mrmovq 24(%rdi), %r13
+	
+	# Сохраняем в dst
+	rmmovq %r10, (%rsi)
+	rmmovq %r11, 8(%rsi)
+	rmmovq %r12, 16(%rsi)
+	rmmovq %r13, 24(%rsi)
+	
+	# Проверяем положительные и считаем
+	xorq %rbx, %rbx		# Локальный счетчик
+	
+	andq %r10, %r10
+	jle Check2
+	iaddq $1, %rbx
+Check2:
+	andq %r11, %r11
+	jle Check3
+	iaddq $1, %rbx
+Check3:
+	andq %r12, %r12
+	jle Check4
+	iaddq $1, %rbx
+Check4:
+	andq %r13, %r13
+	jle UpdatePointers
+	iaddq $1, %rbx
+	
+UpdatePointers:
+	# Добавляем локальный счетчик к общему
+	addq %rbx, %rax
+	
+	# Обновляем указатели
+	iaddq $32, %rdi		# src += 32
+	iaddq $32, %rsi		# dst += 32
+	iaddq $-4, %rdx		# len -= 4
+	
+	# Проверяем условие продолжения
+	irmovq $4, %r10
+	subq %r10, %rdx		# len - 4
+	jge UnrolledLoop	# Если >= 0, продолжаем
+	
+	# Корректируем len после проверки
+	iaddq $4, %rdx
+
+HandleSmall:
+	# Обработка оставшихся элементов (0-3)
+	andq %rdx, %rdx
+	jle Done
+
+SmallLoop:
+	mrmovq (%rdi), %r10
+	rmmovq %r10, (%rsi)
+	andq %r10, %r10
+	jle SmallNext
+	iaddq $1, %rax
+SmallNext:
+	iaddq $8, %rdi
+	iaddq $8, %rsi
+	iaddq $-1, %rdx
+	jg SmallLoop
+
+Done:
+	ret
+End:
+EndFun:
+
+###############################
+# Source and destination blocks 
+###############################
+	.align 8
+src:
+	.quad -1
+	.quad -2
+	.quad 3
+	.quad 4
+	.quad 0xbcdefa # This shouldn't get moved
+
+	.align 16
+Predest:
+	.quad 0xbcdefa
+dest:
+	.quad 0xcdefab
+	.quad 0xcdefab
+	.quad 0xcdefab
+	.quad 0xcdefab
+Postdest:
+	.quad 0xdefabc
+
+.align 8
+# Run time stack
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+	.quad 0
+
+Stack:

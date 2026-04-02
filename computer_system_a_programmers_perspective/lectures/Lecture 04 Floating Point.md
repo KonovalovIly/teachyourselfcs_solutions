@@ -1,0 +1,4 @@
+- Old ways for representing floating points numbers
+- Floating point standard IEEE
+- Normalize values
+- Rounding

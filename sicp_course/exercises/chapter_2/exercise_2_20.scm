@@ -1,0 +1,7 @@
+(define (same-parity x . xs)
+  (define (same-parity-helper lst)
+    (cond ((null? lst) '())
+          ((= (remainder (car lst) 2) (remainder x 2))
+           (cons (car lst) (same-parity-helper (cdr lst))))
+          (else (same-parity-helper (cdr lst)))))
+  (cons x (same-parity-helper xs)))

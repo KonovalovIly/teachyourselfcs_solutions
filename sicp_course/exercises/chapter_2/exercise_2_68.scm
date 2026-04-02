@@ -1,0 +1,12 @@
+(define (encode-symbol symbol tree)
+  (define (search current-tree bits)
+    (cond ((leaf? current-tree)
+           (if (eq? symbol (symbol-leaf current-tree))
+               bits
+               (error "Symbol not found in tree" symbol)))
+          ((memq symbol (symbols (left-branch current-tree)))
+           (search (left-branch current-tree) (append bits '(0))))
+          ((memq symbol (symbols (right-branch current-tree)))
+           (search (right-branch current-tree) (append bits '(1))))
+          (else (error "Symbol not found in tree" symbol))))
+  (search tree '()))

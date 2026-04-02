@@ -1,0 +1,141 @@
+                            | #######################################################################
+                            | # Test for copying block of size 4;
+                            | #######################################################################
+0x000:                      | 	.pos 0
+0x000: 30f48002000000000000 | main:	irmovq Stack, %rsp  	# Set up stack pointer
+                            | 
+                            | 	# Set up arguments for copy function and then invoke it
+0x00a: 30f20400000000000000 | 	irmovq $4, %rdx		# src and dst have 4 elements
+0x014: 30f6d801000000000000 | 	irmovq dest, %rsi	# dst array
+0x01e: 30f7a801000000000000 | 	irmovq src, %rdi	# src array
+0x028: 803200000000000000   | 	call ncopy		 
+0x031: 00                   | 	halt			# should halt with num nonzeros in %rax
+0x032:                      | StartFun:
+                            | # Оптимизированный ncopy с развертыванием 4x
+0x032:                      | ncopy:
+0x032: 6300                 | 	xorq %rax, %rax		# count = 0
+0x034: 6222                 | 	andq %rdx, %rdx		# len <= 0?
+0x036: 71a001000000000000   | 	jle Done		# if so, goto Done
+                            | 
+                            | 	# Развертывание 4x
+0x03f: 30f80400000000000000 | 	irmovq $4, %r8
+0x049: 30f92000000000000000 | 	irmovq $32, %r9		# 4 * 8 = 32 байта
+                            | 	
+                            | 	# Проверяем, достаточно ли элементов
+0x053: 2021                 | 	rrmovq %rdx, %rcx
+0x055: 6181                 | 	subq %r8, %rcx
+0x057: 724501000000000000   | 	jl HandleSmall
+                            | 
+0x060:                      | UnrolledLoop:
+                            | 	# Используем несколько регистров для параллельной обработки
+0x060: 50a70000000000000000 | 	mrmovq (%rdi), %r10
+0x06a: 50b70800000000000000 | 	mrmovq 8(%rdi), %r11
+0x074: 50c71000000000000000 | 	mrmovq 16(%rdi), %r12
+0x07e: 50d71800000000000000 | 	mrmovq 24(%rdi), %r13
+                            | 	
+                            | 	# Сохраняем в dst
+0x088: 40a60000000000000000 | 	rmmovq %r10, (%rsi)
+0x092: 40b60800000000000000 | 	rmmovq %r11, 8(%rsi)
+0x09c: 40c61000000000000000 | 	rmmovq %r12, 16(%rsi)
+0x0a6: 40d61800000000000000 | 	rmmovq %r13, 24(%rsi)
+                            | 	
+                            | 	# Проверяем положительные и считаем
+0x0b0: 6333                 | 	xorq %rbx, %rbx		# Локальный счетчик
+                            | 	
+0x0b2: 62aa                 | 	andq %r10, %r10
+0x0b4: 71c700000000000000   | 	jle Check2
+0x0bd: c0f30100000000000000 | 	iaddq $1, %rbx
+0x0c7:                      | Check2:
+0x0c7: 62bb                 | 	andq %r11, %r11
+0x0c9: 71dc00000000000000   | 	jle Check3
+0x0d2: c0f30100000000000000 | 	iaddq $1, %rbx
+0x0dc:                      | Check3:
+0x0dc: 62cc                 | 	andq %r12, %r12
+0x0de: 71f100000000000000   | 	jle Check4
+0x0e7: c0f30100000000000000 | 	iaddq $1, %rbx
+0x0f1:                      | Check4:
+0x0f1: 62dd                 | 	andq %r13, %r13
+0x0f3: 710601000000000000   | 	jle UpdatePointers
+0x0fc: c0f30100000000000000 | 	iaddq $1, %rbx
+                            | 	
+0x106:                      | UpdatePointers:
+                            | 	# Добавляем локальный счетчик к общему
+0x106: 6030                 | 	addq %rbx, %rax
+                            | 	
+                            | 	# Обновляем указатели
+0x108: c0f72000000000000000 | 	iaddq $32, %rdi		# src += 32
+0x112: c0f62000000000000000 | 	iaddq $32, %rsi		# dst += 32
+0x11c: c0f2fcffffffffffffff | 	iaddq $-4, %rdx		# len -= 4
+                            | 	
+                            | 	# Проверяем условие продолжения
+0x126: 30fa0400000000000000 | 	irmovq $4, %r10
+0x130: 61a2                 | 	subq %r10, %rdx		# len - 4
+0x132: 756000000000000000   | 	jge UnrolledLoop	# Если >= 0, продолжаем
+                            | 	
+                            | 	# Корректируем len после проверки
+0x13b: c0f20400000000000000 | 	iaddq $4, %rdx
+                            | 
+0x145:                      | HandleSmall:
+                            | 	# Обработка оставшихся элементов (0-3)
+0x145: 6222                 | 	andq %rdx, %rdx
+0x147: 71a001000000000000   | 	jle Done
+                            | 
+0x150:                      | SmallLoop:
+0x150: 50a70000000000000000 | 	mrmovq (%rdi), %r10
+0x15a: 40a60000000000000000 | 	rmmovq %r10, (%rsi)
+0x164: 62aa                 | 	andq %r10, %r10
+0x166: 717901000000000000   | 	jle SmallNext
+0x16f: c0f00100000000000000 | 	iaddq $1, %rax
+0x179:                      | SmallNext:
+0x179: c0f70800000000000000 | 	iaddq $8, %rdi
+0x183: c0f60800000000000000 | 	iaddq $8, %rsi
+0x18d: c0f2ffffffffffffffff | 	iaddq $-1, %rdx
+0x197: 765001000000000000   | 	jg SmallLoop
+                            | 
+0x1a0:                      | Done:
+0x1a0: 90                   | 	ret
+0x1a1:                      | End:
+0x1a1:                      | EndFun:
+                            | 
+                            | ###############################
+                            | # Source and destination blocks 
+                            | ###############################
+0x1a8:                      | 	.align 8
+0x1a8:                      | src:
+0x1a8: ffffffffffffffff     | 	.quad -1
+0x1b0: feffffffffffffff     | 	.quad -2
+0x1b8: 0300000000000000     | 	.quad 3
+0x1c0: 0400000000000000     | 	.quad 4
+0x1c8: fadebc0000000000     | 	.quad 0xbcdefa # This shouldn't get moved
+                            | 
+0x1d0:                      | 	.align 16
+0x1d0:                      | Predest:
+0x1d0: fadebc0000000000     | 	.quad 0xbcdefa
+0x1d8:                      | dest:
+0x1d8: abefcd0000000000     | 	.quad 0xcdefab
+0x1e0: abefcd0000000000     | 	.quad 0xcdefab
+0x1e8: abefcd0000000000     | 	.quad 0xcdefab
+0x1f0: abefcd0000000000     | 	.quad 0xcdefab
+0x1f8:                      | Postdest:
+0x1f8: bcfade0000000000     | 	.quad 0xdefabc
+                            | 
+0x200:                      | .align 8
+                            | # Run time stack
+0x200: 0000000000000000     | 	.quad 0
+0x208: 0000000000000000     | 	.quad 0
+0x210: 0000000000000000     | 	.quad 0
+0x218: 0000000000000000     | 	.quad 0
+0x220: 0000000000000000     | 	.quad 0
+0x228: 0000000000000000     | 	.quad 0
+0x230: 0000000000000000     | 	.quad 0
+0x238: 0000000000000000     | 	.quad 0
+0x240: 0000000000000000     | 	.quad 0
+0x248: 0000000000000000     | 	.quad 0
+0x250: 0000000000000000     | 	.quad 0
+0x258: 0000000000000000     | 	.quad 0
+0x260: 0000000000000000     | 	.quad 0
+0x268: 0000000000000000     | 	.quad 0
+0x270: 0000000000000000     | 	.quad 0
+0x278: 0000000000000000     | 	.quad 0
+                            | 
+0x280:                      | Stack:

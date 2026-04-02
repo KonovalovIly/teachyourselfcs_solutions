@@ -1,0 +1,65 @@
+# Alternative implementation with different loop structure
+
+# Program starts here
+	.pos 0
+init:
+	irmovq stack, %rsp		# Initialize stack pointer
+	irmovq ele1, %rdi		# Load list address into %rdi
+	call rsum_list			# Call the function
+	halt				# Result will be in %rax
+
+# Linked list (same as before)
+.align 8
+ele1:
+	.quad 0x00a
+	.quad ele2
+ele2:
+	.quad 0x0b0
+	.quad ele3
+ele3:
+	.quad 0xc00
+	.quad 0
+
+# sum_list function with different implementation
+rsum_list:
+	# Prologue
+	pushq %rbp				# Save frame pointer
+	rrmovq %rsp, %rbp		# Set up new frame
+
+	# Base case: if (ls == NULL) return 0;
+	andq %rdi, %rdi			# Test if ls == NULL
+	jne recurse				# If not NULL, go to recursive case
+
+	# Base case return 0
+	irmovq $0, %rax			# Return value = 0
+	jmp return
+
+recurse:
+	# Save callee-saved registers if needed
+	pushq %rbx				# We'll use %rbx to store ls->val
+	
+	# Get ls->val
+	mrmovq 0(%rdi), %rbx	# val = ls->val (store in %rbx)
+	
+	# Prepare argument for recursive call: rsum_list(ls->next)
+	mrmovq 8(%rdi), %rdi	# ls = ls->next
+	
+	# Recursive call
+	call rsum_list			# rest = rsum_list(ls->next)
+	# Result is in %rax
+	
+	# Add val + rest
+	addq %rbx, %rax			# val + rest (result in %rax)
+	
+	# Restore callee-saved registers
+	popq %rbx				# Restore %rbx
+	
+return:
+	# Epilogue
+	rrmovq %rbp, %rsp		# Restore stack pointer
+	popq %rbp				# Restore frame pointer
+	ret						# Return
+
+# Stack space (needs to be larger for recursion)
+	.pos 0x400
+stack:

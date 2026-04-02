@@ -1,0 +1,11 @@
+- Bytes, Bits, Integers
+- Encoding hexadecimal numbers
+- Data representation in computer
+![[Pasted image 20250901185757.png|300]]
+- Boolean Algebra
+- Boolean and Logical Operators in C
+- Shift Operations
+- Two-complement numbers
+- Transitions between Signed and Unsigned values
+- Casting one to another
+- Sign extension

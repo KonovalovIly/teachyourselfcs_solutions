@@ -1,0 +1,22 @@
+- **Programming**
+	Start point introducing to computer science. 
+	- [x]  🧬**SICP** - fundamental book will introduce you to functional programming
+    	- Old but mind-blowing book. With it's help you can track evolution of programming
+    	- It was so hard, to end this book. It was like learning Latin the dead language because nobody use them for daily speech. And you cant use your knowledge on different daily tasks. 
+	    - **Summary** I do not recommend this book, Maybe when you look a lot of other courses and want something different, like functional programming
+	    - **Time** I spent 3 months
+	- [x] ✏**CS61A** - course based on SICP book
+		 - More modern when SICP, with almost the same Topics
+		 - More easy to understand. And because of that less deep.
+		 - **Summary** 100% recommendation, lectures short and understandable. Exercises divided and well structured 
+		 - **Time** I spent 1 month
+- **Computer Architecture**
+	- [x] 🪛 Start from Basic C knowledge
+		- I started from [[The C Programming Language.pdf]] . From chapter 1 to 6. Wit  tasks in book.
+		- **Summary** I recommend this book for learning C
+	- [x] 🖥️ Next Berkeley CS 61C video course [[CS61C 20 fa]]
+		- **Summary** I recommend this course, it is light but superficial. And RISK not so popular but it was interesting dive in another architecture.
+		- **Time** I spent 2 months
+	- [x] 🖥️ Computer System A Programmers perspective [[CMU: 2015 Spring: 15-213]]
+		- **Summary** It very complex and compecated, it cover a lot of topics. If you want dive in hardware better to choose Nand2Tetris or CS61C. This course for person who have a lot of free time
+		- **Time** I spent 6 months 

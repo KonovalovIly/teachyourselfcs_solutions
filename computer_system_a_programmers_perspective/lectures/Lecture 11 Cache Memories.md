@@ -1,0 +1,5 @@
+- L1 cache
+- L2 cache
+- Cache hit
+- Cache miss
+- 

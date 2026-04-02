@@ -1,0 +1,91 @@
+- [x]  Week 1
+	- [x] Welcome
+		- [x] [Disc 00: Getting Started](https://insideempire.github.io/CS61A-Website-Archive/disc/disc00/index.html)
+		- [x] [Lab 00: Getting Started](https://insideempire.github.io/CS61A-Website-Archive/lab/lab00.html)
+	- [x] Functions
+		- [x] [HW 01: Functions, Control](https://insideempire.github.io/CS61A-Website-Archive/hw/hw01/index.html)
+- [x] Week 2
+	- [x] No Lecture: Labor Day
+		- [x] [Lab 01: Functions](https://insideempire.github.io/CS61A-Website-Archive/lab/lab01/index.html)
+	- [x] Control
+		- [x] [Disc 01: Control, Environment Diagrams](https://insideempire.github.io/CS61A-Website-Archive/disc/disc01/index.html)
+	- [x] Higher-Order Functions
+		- [x] [HW 02: Higher-Order Functions](https://insideempire.github.io/CS61A-Website-Archive/hw/hw02/index.html)
+		- [x] [Hog](https://insideempire.github.io/CS61A-Website-Archive/proj/hog/index.html)
+- [x] Week 3
+	- [x] Environments
+		- [x] [Lab 02: Higher-Order Functions, Lambda Expressions](https://insideempire.github.io/CS61A-Website-Archive/lab/lab02/index.html)
+	- [x] Functional Abstraction
+		- [x] [Disc 02: Environment Diagrams, Higher-Order Functions](https://insideempire.github.io/CS61A-Website-Archive/disc/disc02/index.html)
+	- [x] Function Examples
+- [x] Week 4
+	- [x] Recursion
+		- [x] [Disc 03: Recursion](https://insideempire.github.io/CS61A-Website-Archive/disc/disc03/index.html)
+	- [x] Tree Recursion
+		- [x] [HW 03: Recursion, Tree Recursion](https://insideempire.github.io/CS61A-Website-Archive/hw/hw03/index.html)
+- [x] Week 5
+	- [x] Sequences
+		- [x] [Lab 03: Recursion, Python Lists](https://insideempire.github.io/CS61A-Website-Archive/lab/lab03/index.html)
+	- [x] Containers
+		- [x] [Disc 04: Tree Recursion](https://insideempire.github.io/CS61A-Website-Archive/disc/disc04/index.html)
+		- [x] [Cats](https://insideempire.github.io/CS61A-Website-Archive/proj/cats/index.html)
+	- [x] Data Abstraction
+- [x] Week 6
+	- [x] Trees
+		- [x] [Lab 04: Tree Recursion, Data Abstraction](https://insideempire.github.io/CS61A-Website-Archive/lab/lab04/index.html)
+	- [x] Mutability
+		- [x] [Disc 05: Trees](https://insideempire.github.io/CS61A-Website-Archive/disc/disc05/index.html)
+	- [x] Iterators
+		- [x] [HW 04: Sequences, Data Abstraction, Trees](https://insideempire.github.io/CS61A-Website-Archive/hw/hw04/index.html)
+- [x] Week 7
+	- [x] Generators
+		- [x] [Lab 05: Iterators, Mutability](https://insideempire.github.io/CS61A-Website-Archive/lab/lab05/index.html)
+	- [x] Objects
+		- [x] [Disc 06: Generators](https://insideempire.github.io/CS61A-Website-Archive/disc/disc06/index.html)
+	- [x] Attributes
+		- [x] [HW 05: Generators](https://insideempire.github.io/CS61A-Website-Archive/hw/hw05/index.html)
+		- [x] [Ants](https://insideempire.github.io/CS61A-Website-Archive/proj/ants/index.html)
+- [x] Week 8
+	- [x] Inheritance
+		- [x] [Lab 06: Object-Oriented Programming](https://insideempire.github.io/CS61A-Website-Archive/lab/lab06/index.html)
+	- [x] Representation
+		- [x] [Disc 07: OOP](https://insideempire.github.io/CS61A-Website-Archive/disc/disc07/index.html)
+	- [x] Composition
+		- [x] [HW 06: Object-Oriented Programming, Linked Lists](https://insideempire.github.io/CS61A-Website-Archive/hw/hw06/index.html)
+- [x] Week 9 - 8/2
+	- [x] Efficiency
+		- [x] [Lab 07: Linked Lists, Inheritance](https://insideempire.github.io/CS61A-Website-Archive/lab/lab07/index.html)
+	- [x] Decomposition
+		- [x] [Disc 08: Linked Lists](https://insideempire.github.io/CS61A-Website-Archive/disc/disc08/index.html)
+	- [x] Data Examples
+- [x] Week 10
+	- [x] [Lab 08: Mutable Trees](https://insideempire.github.io/CS61A-Website-Archive/lab/lab08/index.html)
+- [x] Week 11
+	- [x] Scheme
+		- [x] [Lab 09: Scheme](https://insideempire.github.io/CS61A-Website-Archive/lab/lab09.html)
+		- [x] [HW 07: Scheme](https://insideempire.github.io/CS61A-Website-Archive/hw/hw07/index.html)
+	- [x] Scheme Lists
+		- [x] [Disc 09: Scheme, Scheme Lists](https://insideempire.github.io/CS61A-Website-Archive/disc/disc09/index.html)
+	- [x] Calculator
+		- [x] [HW 08: Scheme Lists](https://insideempire.github.io/CS61A-Website-Archive/hw/hw08/index.html)
+- [x] Week 12
+	- [x]  [Lab 10: Interpreters](https://insideempire.github.io/CS61A-Website-Archive/lab/lab10/index.html)
+	- [x] Interpreters
+		- [x] [Disc 10: Interpreters](https://insideempire.github.io/CS61A-Website-Archive/disc/disc10/index.html)
+		- [x] [Scheme](https://insideempire.github.io/CS61A-Website-Archive/proj/scheme.html)
+	- [x] Programs as Data
+		- [x] [HW 09: Programs as Data, Macros](https://insideempire.github.io/CS61A-Website-Archive/hw/hw09/index.html)
+- [x] Week 13
+	- [x] Macros
+		- [x] [Lab 11: Programs as Data, Macros](https://insideempire.github.io/CS61A-Website-Archive/lab/lab11/index.html)
+	- [x] SQL
+		- [x] [Disc 11: Macros](https://insideempire.github.io/CS61A-Website-Archive/disc/disc11/index.html)
+	- [x] Tables
+		- [x] [HW 10: SQL](https://insideempire.github.io/CS61A-Website-Archive/hw/hw10/index.html)|
+- [x] Week 14
+	- [x] Aggregation
+- [x] Week 15
+	- [x] Databases
+		- [x] [Lab 12: SQL](https://insideempire.github.io/CS61A-Website-Archive/lab/lab12/index.html)
+	- [x] Designing Functions
+		- [x] [Disc 12: SQL](https://insideempire.github.io/CS61A-Website-Archive/disc/disc12/index.html)

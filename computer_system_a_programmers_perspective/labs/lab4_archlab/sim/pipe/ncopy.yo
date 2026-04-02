@@ -1,0 +1,150 @@
+                            | # Максимально оптимизированная версия с развертыванием 8x
+0x000:                      | ncopy:
+0x000: 6300                 | 	xorq %rax, %rax		# count = 0
+0x002: 6222                 | 	andq %rdx, %rdx		# len <= 0?
+0x004: 71c302000000000000   | 	jle Done		# if so, goto Done
+                            | 
+                            | 	# Развертывание 8x
+0x00d: 30f80800000000000000 | 	irmovq $8, %r8
+0x017: 30f94000000000000000 | 	irmovq $64, %r9		# 8 * 8 = 64 байта
+                            | 	
+                            | 	# Проверяем, достаточно ли элементов
+0x021: 2021                 | 	rrmovq %rdx, %rcx
+0x023: 6181                 | 	subq %r8, %rcx
+0x025: 72b701000000000000   | 	jl HandleRemainder
+                            | 
+0x02e:                      | MainLoop8x:
+                            | 	# Обрабатываем 8 элементов за итерацию
+0x02e: 6333                 | 	xorq %rbx, %rbx		# Локальный счетчик для этой итерации
+                            | 	
+                            | 	# Элементы 1-4
+0x030: 50a70000000000000000 | 	mrmovq (%rdi), %r10
+0x03a: 50b70800000000000000 | 	mrmovq 8(%rdi), %r11
+0x044: 50c71000000000000000 | 	mrmovq 16(%rdi), %r12
+0x04e: 50d71800000000000000 | 	mrmovq 24(%rdi), %r13
+                            | 	
+0x058: 40a60000000000000000 | 	rmmovq %r10, (%rsi)
+0x062: 40b60800000000000000 | 	rmmovq %r11, 8(%rsi)
+0x06c: 40c61000000000000000 | 	rmmovq %r12, 16(%rsi)
+0x076: 40d61800000000000000 | 	rmmovq %r13, 24(%rsi)
+                            | 	
+                            | 	# Проверяем положительные для первых 4
+0x080: 62aa                 | 	andq %r10, %r10
+0x082: 719500000000000000   | 	jle Elem2Chk
+0x08b: c0f30100000000000000 | 	iaddq $1, %rbx
+0x095:                      | Elem2Chk:
+0x095: 62bb                 | 	andq %r11, %r11
+0x097: 71aa00000000000000   | 	jle Elem3Chk
+0x0a0: c0f30100000000000000 | 	iaddq $1, %rbx
+0x0aa:                      | Elem3Chk:
+0x0aa: 62cc                 | 	andq %r12, %r12
+0x0ac: 71bf00000000000000   | 	jle Elem4Chk
+0x0b5: c0f30100000000000000 | 	iaddq $1, %rbx
+0x0bf:                      | Elem4Chk:
+0x0bf: 62dd                 | 	andq %r13, %r13
+0x0c1: 71d400000000000000   | 	jle SecondHalf
+0x0ca: c0f30100000000000000 | 	iaddq $1, %rbx
+                            | 	
+0x0d4:                      | SecondHalf:
+                            | 	# Элементы 5-8
+0x0d4: 50a72000000000000000 | 	mrmovq 32(%rdi), %r10
+0x0de: 50b72800000000000000 | 	mrmovq 40(%rdi), %r11
+0x0e8: 50c73000000000000000 | 	mrmovq 48(%rdi), %r12
+0x0f2: 50d73800000000000000 | 	mrmovq 56(%rdi), %r13
+                            | 	
+0x0fc: 40a62000000000000000 | 	rmmovq %r10, 32(%rsi)
+0x106: 40b62800000000000000 | 	rmmovq %r11, 40(%rsi)
+0x110: 40c63000000000000000 | 	rmmovq %r12, 48(%rsi)
+0x11a: 40d63800000000000000 | 	rmmovq %r13, 56(%rsi)
+                            | 	
+                            | 	# Проверяем положительные для вторых 4
+0x124: 62aa                 | 	andq %r10, %r10
+0x126: 713901000000000000   | 	jle Elem6Chk
+0x12f: c0f30100000000000000 | 	iaddq $1, %rbx
+0x139:                      | Elem6Chk:
+0x139: 62bb                 | 	andq %r11, %r11
+0x13b: 714e01000000000000   | 	jle Elem7Chk
+0x144: c0f30100000000000000 | 	iaddq $1, %rbx
+0x14e:                      | Elem7Chk:
+0x14e: 62cc                 | 	andq %r12, %r12
+0x150: 716301000000000000   | 	jle Elem8Chk
+0x159: c0f30100000000000000 | 	iaddq $1, %rbx
+0x163:                      | Elem8Chk:
+0x163: 62dd                 | 	andq %r13, %r13
+0x165: 717801000000000000   | 	jle UpdateLoop
+0x16e: c0f30100000000000000 | 	iaddq $1, %rbx
+                            | 	
+0x178:                      | UpdateLoop:
+                            | 	# Обновляем общий счетчик
+0x178: 6030                 | 	addq %rbx, %rax
+                            | 	
+                            | 	# Обновляем указатели и len
+0x17a: c0f74000000000000000 | 	iaddq $64, %rdi		# src += 64
+0x184: c0f64000000000000000 | 	iaddq $64, %rsi		# dst += 64
+0x18e: c0f2f8ffffffffffffff | 	iaddq $-8, %rdx		# len -= 8
+                            | 	
+                            | 	# Проверяем, можно ли еще итерацию 8x
+0x198: 30fa0800000000000000 | 	irmovq $8, %r10
+0x1a2: 61a2                 | 	subq %r10, %rdx		# len - 8
+0x1a4: 752e00000000000000   | 	jge MainLoop8x
+                            | 	
+                            | 	# Корректируем len
+0x1ad: c0f20800000000000000 | 	iaddq $8, %rdx
+                            | 
+0x1b7:                      | HandleRemainder:
+                            | 	# Обработка оставшихся элементов (0-7)
+0x1b7: 6222                 | 	andq %rdx, %rdx
+0x1b9: 71c302000000000000   | 	jle Done
+                            | 	
+                            | 	# Развертывание 2x для остатка (лучше чем 1x)
+0x1c2: 30f80200000000000000 | 	irmovq $2, %r8
+                            | 	
+                            | 	# Проверяем, достаточно ли для развернутого остатка
+0x1cc: 2021                 | 	rrmovq %rdx, %rcx
+0x1ce: 6181                 | 	subq %r8, %rcx
+0x1d0: 726802000000000000   | 	jl FinalRemainder
+                            | 
+0x1d9:                      | RemainderLoop2x:
+0x1d9: 50a70000000000000000 | 	mrmovq (%rdi), %r10
+0x1e3: 50b70800000000000000 | 	mrmovq 8(%rdi), %r11
+0x1ed: 40a60000000000000000 | 	rmmovq %r10, (%rsi)
+0x1f7: 40b60800000000000000 | 	rmmovq %r11, 8(%rsi)
+                            | 	
+0x201: 62aa                 | 	andq %r10, %r10
+0x203: 711602000000000000   | 	jle RemCheck2
+0x20c: c0f00100000000000000 | 	iaddq $1, %rax
+0x216:                      | RemCheck2:
+0x216: 62bb                 | 	andq %r11, %r11
+0x218: 712b02000000000000   | 	jle RemNext
+0x221: c0f00100000000000000 | 	iaddq $1, %rax
+                            | 	
+0x22b:                      | RemNext:
+0x22b: c0f71000000000000000 | 	iaddq $16, %rdi
+0x235: c0f61000000000000000 | 	iaddq $16, %rsi
+0x23f: c0f2feffffffffffffff | 	iaddq $-2, %rdx
+                            | 	
+0x249: 30fa0200000000000000 | 	irmovq $2, %r10
+0x253: 61a2                 | 	subq %r10, %rdx
+0x255: 75d901000000000000   | 	jge RemainderLoop2x
+                            | 	
+0x25e: c0f20200000000000000 | 	iaddq $2, %rdx
+                            | 
+0x268:                      | FinalRemainder:
+0x268: 6222                 | 	andq %rdx, %rdx
+0x26a: 71c302000000000000   | 	jle Done
+                            | 
+0x273:                      | FinalLoop:
+0x273: 50a70000000000000000 | 	mrmovq (%rdi), %r10
+0x27d: 40a60000000000000000 | 	rmmovq %r10, (%rsi)
+0x287: 62aa                 | 	andq %r10, %r10
+0x289: 719c02000000000000   | 	jle FinalNext
+0x292: c0f00100000000000000 | 	iaddq $1, %rax
+0x29c:                      | FinalNext:
+0x29c: c0f70800000000000000 | 	iaddq $8, %rdi
+0x2a6: c0f60800000000000000 | 	iaddq $8, %rsi
+0x2b0: c0f2ffffffffffffffff | 	iaddq $-1, %rdx
+0x2ba: 767302000000000000   | 	jg FinalLoop
+                            | 
+0x2c3:                      | Done:
+0x2c3: 90                   | 	ret
+0x2c4:                      | End:

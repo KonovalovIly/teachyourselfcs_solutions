@@ -1,0 +1,5 @@
+- Conditional code
+- Compare
+- Set condition codes
+- jump instructions
+- Example for switch statement

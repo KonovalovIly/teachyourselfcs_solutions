@@ -1,0 +1,7 @@
+- Array
+- Array allocation
+- Elements Access
+- Nested arrays (multidimensional)
+- Element access in nested array
+- Structures
+- Alignment Principles

@@ -1,0 +1,20 @@
+;; Brute-force method
+(define (ordered-triples n s)
+  (filter (lambda (triple) (= (sum triple) s))
+          (filter distinct?
+                 (flatmap (lambda (i)
+                            (flatmap (lambda (j)
+                                       (map (lambda (k) (list i j k))
+                                            (enumerate-interval 1 n)))
+                                     (enumerate-interval 1 n))
+                          (enumerate-interval 1 n))))))
+
+;; Optimized method (preferred)
+(define (ordered-triples n s)
+  (flatmap (lambda (pair)
+             (let ((k (- s (car pair) (cadr pair))))
+               (if (and (<= 1 k n)
+                        (not (member k pair)))
+                   (list (append pair (list k)))
+                   '()))
+           (unique-pairs n))))

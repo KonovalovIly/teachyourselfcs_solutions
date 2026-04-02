@@ -1,0 +1,4 @@
+- HDD
+- SSD
+- DDR
+- Cache

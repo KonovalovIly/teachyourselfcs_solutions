@@ -1,0 +1,17 @@
+- Why we should now machine code
+- Why x86
+- x86 history
+- Processor striction
+- ARM another dominant on instructions market
+- Some definitions
+- From C to machine code
+- Compilation Result
+- Disassembling
+- Assembly basics
+- Registers
+- Moving data
+	- movq Source, Dest
+	- ![[Pasted image 20250903144023.png|300]]
+- Arithmetic operations
+	- leaq Src, Dest operation
+	- ![[Pasted image 20250903150256.png|300]]

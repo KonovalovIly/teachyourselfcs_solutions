@@ -1,0 +1,44 @@
+# Alternative implementation with different loop structure
+
+# Program starts here
+	.pos 0
+init:
+	irmovq stack, %rsp		# Initialize stack pointer
+	irmovq ele1, %rdi		# Load list address into %rdi
+	call sum_list			# Call the function
+	halt				# Result will be in %rax
+
+# Linked list (same as before)
+.align 8
+ele1:
+	.quad 0x00a
+	.quad ele2
+ele2:
+	.quad 0x0b0
+	.quad ele3
+ele3:
+	.quad 0xc00
+	.quad 0
+
+# sum_list function with different implementation
+sum_list:
+	pushq %rbx			# Save %rbx (callee-saved)
+	irmovq $0, %rax			# sum = 0
+	
+sum_loop:
+	andq %rdi, %rdi		# Test if ls == NULL
+	je sum_done			# If so, we're done
+	
+	mrmovq (%rdi), %rbx	# Get ls->val
+	addq %rbx, %rax		# Add to sum
+	
+	mrmovq 8(%rdi), %rdi	# ls = ls->next
+	jmp sum_loop		# Continue loop
+	
+sum_done:
+	popq %rbx			# Restore %rbx
+	ret				# Return
+
+# Stack
+	.pos 0x200
+stack:

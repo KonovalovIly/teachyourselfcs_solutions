@@ -1,0 +1,62 @@
+- [x] 1 - A Tour of Computer Systems - 8/15
+	- [x] Practice
+	- [x] [[Lecture 01 Course Overview]]
+	- [x] lab0 - cprogramminglab
+- [x] 2 - Representing and Manipulating Information - 8/21
+	- [x] [[Lecture 02 Bits, Bytes, and Integers]]
+	- [x] [[Lecture 03 Bits, Bytes, and Integers]]
+	- [x] [[Lecture 04 Floating Point]]
+	- [x] Practice
+	- [x] lab1 - datalab
+- [x] 3 - Machine-Level Representation of Programs - 9/20
+	- [x] [[Lecture 05 Machine-Level Programming I Basics]]
+	- [x] [[Lecture 06 Machine-Level Programming II Control]]
+	- [x] [[Lecture 07 Machine-Level Programming III Procedures]]
+	- [x] [[Lecture 08 Machine-Level Programming IV Data]]
+	- [x] Practice
+	- [x] lab2 - bomblab
+	- [x] lab3 - attack_lab
+	- [x] [[Lecture 09 Machine-Level Programming V Advanced Topics]]
+- [x] 4 - Processor Architecture
+	- [x] Practice
+	- [x] lab4 - archlab
+- [x] 5 - Optimizing Program Performance
+	- [x] Practice
+	- [x] lab5 - perfomance
+	- [ ] [[Lecture 27 Program Optimization]]
+- [x] 6 - The Memory Hierarchy
+	- [x] [[Lecture 10 The Memory Hierarchy]]
+	- [x] [[Lecture 11 Cache Memories]]
+	- [x] Practice
+	- [x] lab6 - cache
+- [x] 7 - Linking
+	- [x] [[Lecture 12 Linking]]
+	- [x] Practice
+- [x] 8 - Exceptional Control Flow
+	- [x] [[Lecture 13 Exceptional Control Flow Exceptions and Processes]]
+	- [x] [[Lecture 14 Multitasking shells Signals Nonlocal Jumps]]
+	- [x] [[Lecture 15 System Level I O]]
+	- [x] Practice
+- [x] 9 - Virtual Memory 
+	- [x] [[Lecture 16 Virtual Memory Concepts]]
+	- [x] [[Lecture 17 Virtual Memory Systems]]
+	- [x] [[Lecture 18 Dynamic Memory Allocation Basic Concepts]]
+	- [x] [[Lecture 19 Dynamic Memory Allocation Advanced Concepts]]
+	- [x] Practice
+	- [x] lab7 - malloc
+- [x] 10 - System-Level I/O
+	- [x] Practice
+	- [x] lab8 - shell
+- [x] 11 - Network Programming
+	- [x] Practice
+	- [x] [[Lecture 20 Internetworking]]
+	- [x] [[Lecture 21 Network Programming]]
+	- [x] [[Lecture 22 Web Services]]
+- [x] 12 - Concurrent Programming
+	- [x] Practice
+	- [x] [[Lecture 23 Concurrent Programming]]
+	- [x] [[Lecture 24 Synchronization Basics]]
+	- [x] [[Lecture 25 Synchronization Advanced]]
+	- [x] [[Lecture 26 Thread Level Parallelism]]
+	- [x] lab 9 - proxy
+- [x] [[Lecture 28 Final Review]]

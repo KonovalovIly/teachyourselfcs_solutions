@@ -1,0 +1,69 @@
+- [x] Chapter 1 - Building Abstractions with Procedures
+	- [x] 1.1 The Elements of Programming
+		- [x] Lecture 1A
+		- [x] Exercises
+	- [x] 1.2 Procedures and the Processes They Generate
+		- [x] Lecture 1B
+		- [x] Exercises
+	- [x] 1.3 Formulating Abstractions with Higher-Order Procedures
+		- [x] Lecture 2A
+		- [x] Exercises
+- [x] Chapter 2 - Building abstractions with data
+	- [x] 2.1  Introduction to Data Abstraction
+		- [x] Lecture 2B
+		- [x] Exercises
+	- [x] 2.2 Hierarchical Data and the Closure Property
+		- [x] Lecture 3A
+		- [x] Exercises
+	- [x] 2.3 Symbolic Data
+		- [x] Lecture 3B
+		- [x] Exercises
+	- [x] 2.4 Multiple Representations for Abstract Data
+		- [x] Lecture 4A
+		- [x] Lecture 4B
+		- [x] Exercises
+	- [x] 2.5 Systems with Generic Operations
+		- [x] Exercises
+- [x] Chapter 3 - Modularity, Objects and State
+	- [x] 3.1 Assignment and Local State
+		- [x] Lecture 5A
+		- [x] Exercises
+	- [x] 3.2 The Environment Model of Evaluation
+		- [x] Exercises
+	- [x] 3.3 Modeling with mutable data
+		- [x] Lecture 5B
+		- [x] Exercises
+	- [x] 3.4 Concurrency: Time Is of the Essence
+		- [x] Exercises
+	- [x] 3.5 Stream 6.7.2025
+		- [x] Lecture 6A
+		- [x] Lecture 6B
+		- [x] Exercises
+- [x] Chapter 4 - Metalinguistic Abstraction
+	- [x] 4.1 The Metacircular Evaluator
+		- [x] Lecture 7A
+		- [x] Exercise
+	- [x] 4.2 Variations on a Scheme — Lazy Evaluation
+		- [x] Lecture 7B
+		- [x] Exercise
+	- [x] 4.3 Variations on a Scheme — Nondeterministic Computing
+		- [x] Exercise
+	- [x] 4.4 Logic Program
+		- [x] Lecture 8A
+		- [x] Lecture 8B
+		- [x] Exercise
+- [x] Chapter 5
+	- [x] 5.1 Designing Register Machines
+		- [x] Lecture 9A
+		- [x] Exercises
+	- [x] 5.2 A Register-Machine Simulator
+		- [x] Lecture 9B
+		- [x] Exercises
+	- [x] 5.3 Storage Allocation and Garbage Collection
+		- [x] Lecture 10A
+		- [x] Exercises
+	- [x] 5.4 The Explicit-Control Evaluator
+		- [x] Lecture 10B
+		- [x] Exercises
+	- [x] 5.5 Compilation
+		- [x] Exercises
