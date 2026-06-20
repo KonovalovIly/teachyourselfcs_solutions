@@ -1,0 +1,46 @@
+- [x] [[1 - Introduction to Algorithm Design]] - 02/04
+	- [x] [[Exercises 1]]
+	- [x] [[Lecture 1 Introduction to Algorithms]]
+- [x] [[2 - Algorithm Analysis]] - 08/04
+	- [x] [[Exercises 2]]
+	- [x] [[Lecture 2 Asymptotic Notation]]
+	- [x] [[Lecture 3 Program Analysis]]
+- [x] [[3 - Data Structures]] - 13/04
+	- [x] [[Exercises 3]]
+	- [x] [[Lecture 4 Elementary Data Structures]]
+	- [x] [[Lecture 5 Dictionaries]]
+	- [x] [[Lecture 6 Hashing]]
+- [x] [[4 - Sorting]] - 15/04
+	- [x] [[Exercises 4]]
+	- [x] [[Lecture 7 Heapsort Priority Queues]]
+	- [x] [[Lecture 8 Mergesort Quicksort]]
+	- [x] [[Lecture 9 Linear Sorting]]
+- [x] [[5 - Divide and Conquer]] - 20/04
+	- [x] [[Exercises 5]]
+- [x] [[6 - Hashing and Randomized Algorithms]] - 05/05
+	- [x] [[Exercises 6]]
+- [x] [[7 - Graph Traversal]]
+	- [x] [[Exercises 7]]
+	- [x] [[Lecture 10 Graph Data Structures]]
+	- [x] [[Lecture 11 Breadth-first Search]]
+	- [x] [[Lecture 12 Depth-First Search]]
+- [x] [[8 - Weighted Graph Algorithms]] - 30/05
+	- [x] [[Exercises 8]]
+- [x] [[9 - Combinatorial Search]] - 01/06
+	- [x] [[Exercises 9]]
+- [x] [[10 - Dynamic Programming]] - 03/06
+	- [x] [[Exercises 10]]
+- [x] [[11 - NP-Completeness]] - 08/06
+	- [x] [[Exercises 11]]
+- [x] [[12 - Dealing with Hard Problems]] - 11/06
+	- [x] [[Exercises 12]]
+- [x] [[13 - How to Design Algorithms]] - 11/06
+- [x] [[14 - A Catalog of Algorithmic Problems]] - 11/06
+- [x] [[15 - Data Structures]] - 11/06
+- [x] [[16 - Numerical Problems]] - 15/06
+- [x] [[17 - Combinatorial Problems]] - 16/06
+- [x] [[18 - Graph Problems Polynomial Time]] - 17/06
+- [x] [[19 - Graph Problems NP-Hard]] - 18/06
+- [x] [[20 - Computational Geometry]] - 19/06
+- [x] [[21 - Set and String Problems]] - 20/06
+- [x] [[22 - Algorithmic Resources]] - 20/06

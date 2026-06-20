@@ -20,3 +20,8 @@
 	- [x] 🖥️ Computer System A Programmers perspective [[CMU: 2015 Spring: 15-213]]
 		- **Summary** It very complex and compecated, it cover a lot of topics. If you want dive in hardware better to choose Nand2Tetris or CS61C. This course for person who have a lot of free time
 		- **Time** I spent 6 months 
+- **Algorithms**
+	- [x] 🪛 The Algorithm Design Manual [[4 Archive/Computer Science/algorithms/the_algorithm_design_manual/Progress|Progress]]
+		- Easiest book for starting in algorithms
+		- **Summary** You need strong math base for diving in algorithms. Better to keep some math cources before Algorithms
+	        - **Time** I spent 2 months
